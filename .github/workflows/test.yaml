@@ -15,7 +15,7 @@ permissions:
     # models: read
 
 env:
-    SECRET: ${{'GITHUB_TOKEN'}}
+    SECRET: ${{secrets.GITHUB_TOKEN}}
 
 jobs:
     first_job:

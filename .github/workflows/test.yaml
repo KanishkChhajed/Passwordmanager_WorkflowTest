@@ -22,6 +22,4 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name : My first job
-              run : |
-                echo "Hello World!!!"
-                echo $SECRET
+              run : echo "Hello World!!!"

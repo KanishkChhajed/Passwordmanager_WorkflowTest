@@ -1,0 +1,25 @@
+name: 'Generate a readme file for a repo'
+on:
+    push:
+        branches:
+            - 'main'
+        paths-ignore:
+            -'**.md'
+            -'github/workflows'
+    workflow_dispatch:
+    schedule:
+        - cron : '0 1 * * *' 
+
+permissions:
+    contents: write
+    # models: read
+
+env:
+    SECRET: ${{'GITHUB_TOKEN'}}
+
+jobs:
+    first_job:
+        runs-on: ubuntu-latest
+        steps:
+            - name : My first job
+              run : echo "Hello World!!!"

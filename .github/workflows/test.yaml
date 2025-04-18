@@ -4,8 +4,8 @@ on:
         branches:
             - 'main'
         paths-ignore:
-            -'**.md'
-            -'.github/workflows/*'
+            - '**.md'
+            - '.github/workflows/*'
     workflow_dispatch:
     # schedule:
         # - cron : '59 * * * *' 
@@ -16,7 +16,7 @@ permissions:
 
 env:
     SECRET: ${{secrets.GITHUB_TOKEN}}
-    GITHUB_CONTEXT: ${{ toJson(github) }}
+    # GITHUB_CONTEXT: ${{ toJson(github) }}
 
 jobs:
     first_job:
@@ -25,4 +25,4 @@ jobs:
             - name : My first job
               run : |
                  echo "Hello World!!!"
-                 echo $GITHUB_CONTEXT
+                #  echo $GITHUB_CONTEXT

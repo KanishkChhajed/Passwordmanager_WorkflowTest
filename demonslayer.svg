@@ -1,0 +1,417 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400">
+  <!-- Background -->
+  <rect width="800" height="400" fill="#0d1117" />
+  
+  <!-- Definitions -->
+  <defs>
+    <!-- Lightning glow filter -->
+    <filter id="lightning-glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="2" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+    
+    <!-- Water ripple filter -->
+    <filter id="water-ripple" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.01" numOctaves="1" result="turbulence" seed="1"/>
+      <feDisplacementMap in="SourceGraphic" in2="turbulence" scale="10" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+  
+  <!-- GitHub Contribution Heat Map (Pixel Art Style) -->
+  <g id="contribution-heatmap">
+    <!-- Month labels (abbreviated) -->
+    <text x="40" y="40" font-family="monospace" font-size="12" fill="#8b949e">Jan</text>
+    <text x="110" y="40" font-family="monospace" font-size="12" fill="#8b949e">Feb</text>
+    <text x="180" y="40" font-family="monospace" font-size="12" fill="#8b949e">Mar</text>
+    <text x="250" y="40" font-family="monospace" font-size="12" fill="#8b949e">Apr</text>
+    <text x="320" y="40" font-family="monospace" font-size="12" fill="#8b949e">May</text>
+    <text x="390" y="40" font-family="monospace" font-size="12" fill="#8b949e">Jun</text>
+    <text x="460" y="40" font-family="monospace" font-size="12" fill="#8b949e">Jul</text>
+    <text x="530" y="40" font-family="monospace" font-size="12" fill="#8b949e">Aug</text>
+    <text x="600" y="40" font-family="monospace" font-size="12" fill="#8b949e">Sep</text>
+    <text x="670" y="40" font-family="monospace" font-size="12" fill="#8b949e">Oct</text>
+    <text x="740" y="40" font-family="monospace" font-size="12" fill="#8b949e">Nov</text>
+    
+    <!-- Day labels -->
+    <text x="20" y="70" font-family="monospace" font-size="12" fill="#8b949e">Mon</text>
+    <text x="20" y="110" font-family="monospace" font-size="12" fill="#8b949e">Wed</text>
+    <text x="20" y="150" font-family="monospace" font-size="12" fill="#8b949e">Fri</text>
+    <text x="20" y="190" font-family="monospace" font-size="12" fill="#8b949e">Sun</text>
+  </g>
+  
+  <!-- Generate the contribution squares in pixel art style -->
+  <script type="application/ecmascript">
+    <![CDATA[
+      // This script is for SVG generation purposes
+      // Contribution levels: 0=none, 1=light, 2=medium, 3=dark, 4=very dark
+      
+      // Create pixel art contribution squares
+      function generateContributions() {
+        const svgNS = "http://www.w3.org/2000/svg";
+        const heatmap = document.getElementById("contribution-heatmap");
+        const colors = ["#161b22", "#0e4429", "#006d32", "#26a641", "#39d353"];
+        
+        // Generate a pattern that looks like real GitHub contributions (some randomization)
+        for (let week = 0; week < 53; week++) {
+          for (let day = 0; day < 7; day++) {
+            let x = 40 + (week * 13);
+            let y = 60 + (day * 13);
+            
+            // Create a pixel art square (contribution cell)
+            let level = Math.floor(Math.random() * 5); // Random level for demonstration
+            
+            // Create border first (pixel art style)
+            let border = document.createElementNS(svgNS, "rect");
+            border.setAttribute("x", x);
+            border.setAttribute("y", y);
+            border.setAttribute("width", 10);
+            border.setAttribute("height", 10);
+            border.setAttribute("fill", "#0d1117");
+            heatmap.appendChild(border);
+            
+            // Create inner square (pixel art style)
+            let square = document.createElementNS(svgNS, "rect");
+            square.setAttribute("x", x+1);
+            square.setAttribute("y", y+1);
+            square.setAttribute("width", 8);
+            square.setAttribute("height", 8);
+            square.setAttribute("fill", colors[level]);
+            square.setAttribute("class", "contrib-square");
+            square.setAttribute("data-level", level);
+            square.setAttribute("data-week", week);
+            square.setAttribute("data-day", day);
+            heatmap.appendChild(square);
+          }
+        }
+      }
+      
+      // Generate the heatmap on load
+      generateContributions();
+    ]]>
+  </script>
+  
+  <!-- Fallback static heatmap (since script might not execute in all contexts) -->
+  <g id="static-heatmap">
+    <!-- Generate 53 weeks x 7 days contribution grid -->
+    <!-- Week 1 -->
+    <rect x="40" y="60" width="10" height="10" fill="#161b22" />
+    <rect x="40" y="73" width="10" height="10" fill="#0e4429" />
+    <rect x="40" y="86" width="10" height="10" fill="#006d32" />
+    <rect x="40" y="99" width="10" height="10" fill="#161b22" />
+    <rect x="40" y="112" width="10" height="10" fill="#26a641" />
+    <rect x="40" y="125" width="10" height="10" fill="#161b22" />
+    <rect x="40" y="138" width="10" height="10" fill="#0e4429" />
+    
+    <!-- Week 2 -->
+    <rect x="53" y="60" width="10" height="10" fill="#0e4429" />
+    <rect x="53" y="73" width="10" height="10" fill="#161b22" />
+    <rect x="53" y="86" width="10" height="10" fill="#26a641" />
+    <rect x="53" y="99" width="10" height="10" fill="#39d353" />
+    <rect x="53" y="112" width="10" height="10" fill="#161b22" />
+    <rect x="53" y="125" width="10" height="10" fill="#006d32" />
+    <rect x="53" y="138" width="10" height="10" fill="#161b22" />
+    
+    <!-- Continue with a pattern until week 53 - Just showing a few representative weeks -->
+    <!-- Weeks 3-10 (partial) -->
+    <rect x="66" y="60" width="10" height="10" fill="#006d32" />
+    <rect x="66" y="73" width="10" height="10" fill="#26a641" />
+    <rect x="66" y="86" width="10" height="10" fill="#161b22" />
+    <rect x="66" y="99" width="10" height="10" fill="#0e4429" />
+    <rect x="66" y="112" width="10" height="10" fill="#161b22" />
+    <rect x="66" y="125" width="10" height="10" fill="#39d353" />
+    <rect x="66" y="138" width="10" height="10" fill="#161b22" />
+    
+    <!-- Generate more contribution squares across the heatmap -->
+    <!-- Adding a pattern that looks like active contribution periods -->
+    <!-- Week 20 (high activity period) -->
+    <rect x="300" y="60" width="10" height="10" fill="#39d353" />
+    <rect x="300" y="73" width="10" height="10" fill="#39d353" />
+    <rect x="300" y="86" width="10" height="10" fill="#26a641" />
+    <rect x="300" y="99" width="10" height="10" fill="#39d353" />
+    <rect x="300" y="112" width="10" height="10" fill="#26a641" />
+    <rect x="300" y="125" width="10" height="10" fill="#39d353" />
+    <rect x="300" y="138" width="10" height="10" fill="#26a641" />
+    
+    <!-- Week 21 (high activity period) -->
+    <rect x="313" y="60" width="10" height="10" fill="#26a641" />
+    <rect x="313" y="73" width="10" height="10" fill="#39d353" />
+    <rect x="313" y="86" width="10" height="10" fill="#39d353" />
+    <rect x="313" y="99" width="10" height="10" fill="#26a641" />
+    <rect x="313" y="112" width="10" height="10" fill="#39d353" />
+    <rect x="313" y="125" width="10" height="10" fill="#26a641" />
+    <rect x="313" y="138" width="10" height="10" fill="#39d353" />
+    
+    <!-- Week 35 (another active period) -->
+    <rect x="500" y="60" width="10" height="10" fill="#39d353" />
+    <rect x="500" y="73" width="10" height="10" fill="#26a641" />
+    <rect x="500" y="86" width="10" height="10" fill="#39d353" />
+    <rect x="500" y="99" width="10" height="10" fill="#39d353" />
+    <rect x="500" y="112" width="10" height="10" fill="#26a641" />
+    <rect x="500" y="125" width="10" height="10" fill="#39d353" />
+    <rect x="500" y="138" width="10" height="10" fill="#26a641" />
+  </g>
+  
+  <!-- Water Breathing Effect (Tanjiro) - Pixel Art Style -->
+  <g id="water-breathing">
+    <!-- Water slash path 1 -->
+    <path d="M 40 100 
+             L 60 95 L 80 105 L 100 100 L 120 90 L 140 105 L 160 100 
+             L 180 95 L 200 105 L 220 100 L 240 90 L 260 105 L 280 100
+             L 300 95 L 320 105 L 340 100 L 360 90 L 380 105 L 400 100"
+          stroke="#0099ff" 
+          stroke-width="8" 
+          fill="none" 
+          stroke-linecap="square" 
+          stroke-linejoin="bevel"
+          opacity="0">
+      <animate attributeName="opacity"
+               values="0;0.8;0"
+               dur="4s"
+               begin="0s"
+               repeatCount="indefinite" />
+      <animate attributeName="stroke-dasharray"
+               values="0 1000;400 60"
+               dur="4s"
+               begin="0s"
+               repeatCount="indefinite" />
+      <animate attributeName="stroke-dashoffset"
+               values="0;-1000"
+               dur="4s"
+               begin="0s"
+               repeatCount="indefinite" />
+      <animate attributeName="filter"
+               values="none;url(#water-ripple);none"
+               dur="4s"
+               begin="0s"
+               repeatCount="indefinite" />
+    </path>
+    
+    <!-- Pixelated water droplets -->
+    <g id="water-droplets">
+      <!-- Row 1 of water droplets -->
+      <rect x="80" y="95" width="4" height="4" fill="#66ccff" opacity="0">
+        <animate attributeName="opacity"
+                 values="0;1;0"
+                 dur="4s"
+                 begin="0.5s"
+                 repeatCount="indefinite" />
+      </rect>
+      <rect x="140" y="100" width="4" height="4" fill="#66ccff" opacity="0">
+        <animate attributeName="opacity"
+                 values="0;1;0"
+                 dur="4s"
+                 begin="0.7s"
+                 repeatCount="indefinite" />
+      </rect>
+      <rect x="200" y="95" width="4" height="4" fill="#66ccff" opacity="0">
+        <animate attributeName="opacity"
+                 values="0;1;0"
+                 dur="4s"
+                 begin="0.9s"
+                 repeatCount="indefinite" />
+      </rect>
+      <rect x="260" y="100" width="4" height="4" fill="#66ccff" opacity="0">
+        <animate attributeName="opacity"
+                 values="0;1;0"
+                 dur="4s"
+                 begin="1.1s"
+                 repeatCount="indefinite" />
+      </rect>
+      <rect x="320" y="95" width="4" height="4" fill="#66ccff" opacity="0">
+        <animate attributeName="opacity"
+                 values="0;1;0"
+                 dur="4s"
+                 begin="1.3s"
+                 repeatCount="indefinite" />
+      </rect>
+    </g>
+    
+    <!-- Second water slash path -->
+    <path d="M 420 130 
+             L 440 125 L 460 135 L 480 130 L 500 120 L 520 135 L 540 130 
+             L 560 125 L 580 135 L 600 130 L 620 120 L 640 135 L 660 130
+             L 680 125 L 700 135 L 720 130"
+          stroke="#0099ff" 
+          stroke-width="8" 
+          fill="none" 
+          stroke-linecap="square" 
+          stroke-linejoin="bevel"
+          opacity="0">
+      <animate attributeName="opacity"
+               values="0;0;0.8;0"
+               dur="4s"
+               begin="1s"
+               repeatCount="indefinite" />
+      <animate attributeName="stroke-dasharray"
+               values="0 1000;400 60"
+               dur="4s"
+               begin="1s"
+               repeatCount="indefinite" />
+      <animate attributeName="stroke-dashoffset"
+               values="0;-1000"
+               dur="4s"
+               begin="1s"
+               repeatCount="indefinite" />
+      <animate attributeName="filter"
+               values="none;url(#water-ripple);none"
+               dur="4s"
+               begin="1s"
+               repeatCount="indefinite" />
+    </path>
+  </g>
+  
+  <!-- Lightning Effect (Zenitsu) - Pixel Art Style -->
+  <g id="lightning-effect">
+    <!-- Main lightning bolt - pixelated -->
+    <path d="M 400 60 
+             L 420 85 L 410 85 
+             L 440 110 L 430 110 
+             L 460 135 L 450 135 
+             L 480 160"
+          stroke="#ffeb3b" 
+          stroke-width="4" 
+          fill="none" 
+          stroke-linecap="square" 
+          stroke-linejoin="miter"
+          filter="url(#lightning-glow)"
+          opacity="0">
+      <animate attributeName="opacity"
+               values="0;0;0;1;0.7;0.9;0.3;0"
+               dur="2s"
+               begin="3s"
+               repeatCount="indefinite" />
+      <animate attributeName="stroke"
+               values="#ffeb3b;#ffffff;#ffeb3b;#ffffff;#ffeb3b"
+               dur="0.2s"
+               begin="3s"
+               repeatCount="10" />
+    </path>
+    
+    <!-- Lightning bolt branches - pixelated -->
+    <path d="M 420 85 L 430 75 M 410 85 L 400 75
+             M 440 110 L 450 100 M 430 110 L 420 100
+             M 460 135 L 470 125"
+          stroke="#ffeb3b" 
+          stroke-width="2" 
+          fill="none" 
+          stroke-linecap="square" 
+          stroke-linejoin="miter"
+          filter="url(#lightning-glow)"
+          opacity="0">
+      <animate attributeName="opacity"
+               values="0;0;0;0.8;0;0.6;0"
+               dur="2s"
+               begin="3.1s"
+               repeatCount="indefinite" />
+    </path>
+    
+    <!-- Second lightning strike -->
+    <path d="M 600 100
+             L 580 125 L 590 125
+             L 560 150 L 570 150
+             L 540 175 L 550 175
+             L 520 200"
+          stroke="#ffeb3b" 
+          stroke-width="4" 
+          fill="none" 
+          stroke-linecap="square" 
+          stroke-linejoin="miter"
+          filter="url(#lightning-glow)"
+          opacity="0">
+      <animate attributeName="opacity"
+               values="0;0;0;0;0;1;0.7;0.9;0.3;0"
+               dur="2s"
+               begin="4s"
+               repeatCount="indefinite" />
+      <animate attributeName="stroke"
+               values="#ffeb3b;#ffffff;#ffeb3b;#ffffff;#ffeb3b"
+               dur="0.2s"
+               begin="4s"
+               repeatCount="10" />
+    </path>
+    
+    <!-- Pixelated lightning sparkles -->
+    <g id="lightning-sparkles">
+      <rect x="400" y="60" width="3" height="3" fill="#ffffff" opacity="0">
+        <animate attributeName="opacity"
+                 values="0;0;0;1;0"
+                 dur="2s"
+                 begin="3s"
+                 repeatCount="indefinite" />
+      </rect>
+      <rect x="480" y="160" width="3" height="3" fill="#ffffff" opacity="0">
+        <animate attributeName="opacity"
+                 values="0;0;0;0;1;0"
+                 dur="2s"
+                 begin="3.2s"
+                 repeatCount="indefinite" />
+      </rect>
+      <rect x="600" y="100" width="3" height="3" fill="#ffffff" opacity="0">
+        <animate attributeName="opacity"
+                 values="0;0;0;0;0;1;0"
+                 dur="2s"
+                 begin="4s"
+                 repeatCount="indefinite" />
+      </rect>
+      <rect x="520" y="200" width="3" height="3" fill="#ffffff" opacity="0">
+        <animate attributeName="opacity"
+                 values="0;0;0;0;0;0;1;0"
+                 dur="2s"
+                 begin="4.2s"
+                 repeatCount="indefinite" />
+      </rect>
+    </g>
+  </g>
+  
+  <!-- Sword icon - pixel style -->
+  <g id="pixel-sword" transform="translate(400, 250) rotate(45)">
+    <!-- Sword handle -->
+    <rect x="-10" y="30" width="20" height="10" fill="#8B4513" />
+    <rect x="-8" y="28" width="16" height="14" fill="#A0522D" />
+    
+    <!-- Guard -->
+    <rect x="-15" y="28" width="30" height="4" fill="#FFD700" />
+    
+    <!-- Blade -->
+    <rect x="-5" y="-50" width="10" height="78" fill="#C0C0C0" />
+    <rect x="-3" y="-50" width="6" height="78" fill="#E0E0E0" />
+    
+    <!-- Animation -->
+    <animateTransform attributeName="transform"
+                      type="translate"
+                      from="400, 250"
+                      to="400, 250"
+                      dur="6s"
+                      repeatCount="indefinite" />
+    <animateTransform attributeName="transform"
+                      type="rotate"
+                      from="45"
+                      to="225"
+                      dur="6s"
+                      additive="sum"
+                      repeatCount="indefinite" />
+  </g>
+  
+  <!-- Title -->
+  <text x="400" y="350" 
+        font-family="monospace" 
+        font-size="20" 
+        fill="#ffffff" 
+        text-anchor="middle"
+        font-weight="bold">
+    DEMON SLAYER: COMMIT BREATHING
+    <animate attributeName="opacity"
+             values="0.8;1;0.8"
+             dur="3s"
+             repeatCount="indefinite" />
+  </text>
+  
+  <!-- Legend -->
+  <text x="400" y="380" 
+        font-family="monospace" 
+        font-size="12" 
+        fill="#8b949e" 
+        text-anchor="middle">
+    Water & Thunder Breathing Techniques
+  </text>
+</svg>

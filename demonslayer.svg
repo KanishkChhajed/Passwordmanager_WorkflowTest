@@ -588,4 +588,4 @@
           opacity="0"
           filter="url(#lightning-glow)">
       <animate attributeName="opacity"
-               values="0;
+               AttValue="0;

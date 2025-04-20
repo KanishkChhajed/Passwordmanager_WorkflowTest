@@ -1,12 +1,12 @@
 name: 'Generate a readme file for a repo'
 on:
+    workflow_dispatch:
     push:
         branches:
             - 'main'
         paths-ignore:
             - '**.md'
             - '.github/workflows/*'
-    workflow_dispatch:
     # schedule:
         # - cron : '59 * * * *' 
 

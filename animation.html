@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dark Wizard GitHub Contribution Magic</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #0d1117;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+        canvas {
+            display: block;
+        }
+        .container {
+            position: relative;
+        }
+        h1 {
+            position: absolute;
+            top: 20px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            color: #e879f9;
+            text-shadow: 0 0 5px #9d4edd;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>The Dark Wizard's Contribution Magic</h1>
+        <canvas id="animationCanvas"></canvas>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const canvas = document.getElementById('animationCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            // Set canvas size
+            canvas.width = 800;
+            canvas.height = 600;
+            
+            // Colors
+            const gridBgColor = '#0d1117';
+            const gridLineColor = '#30363d';
+            const contributionColors = [
+                '#161b22', // Empty/no contribution
+                '#0e4429', // Level 1
+                '#006d32', // Level 2
+                '#26a641', // Level 3
+                '#39d353'  // Level 4
+            ];
+            
+            // GitHub grid properties
+            const gridStartX = 200;
+            const gridStartY = 150;
+            const cellSize = 12;
+            const cellGap = 2;
+            const rows = 7;
+            const cols = 52;
+            const gridWidth = cols * (cellSize + cellGap) - cellGap;
+            const gridHeight = rows * (cellSize + cellGap) - cellGap;
+            
+            // Store the original grid state
+            let contributionGrid = [];
+            
+            // Initialize grid with random contributions
+            function initializeGrid() {
+                contributionGrid = [];
+                for (let row = 0; row < rows; row++) {
+                    const rowData = [];
+                    for (let col = 0; col < cols; col++) {
+                        // Generate random contribution level (0-4)
+                        rowData.push(Math.floor(Math.random() * 5));
+                    }
+                    contributionGrid.push(rowData);
+                }
+            }
+            
+            // Draw the GitHub contribution grid
+            function drawContributionGrid() {
+                ctx.fillStyle = gridBgColor;
+                ctx.fillRect(gridStartX - 10, gridStartY - 10, gridWidth + 20, gridHeight + 20);
+                ctx.strokeStyle = gridLineColor;
+                ctx.strokeRect(gridStartX - 10, gridStartY - 10, gridWidth + 20, gridHeight + 20);
+                
+                for (let row = 0; row < rows; row++) {
+                    for (let col = 0; col < cols; col++) {
+                        const x = gridStartX + col * (cellSize + cellGap);
+                        const y = gridStartY + row * (cellSize + cellGap);
+                        const contributionLevel = contributionGrid[row][col];
+                        
+                        ctx.fillStyle = contributionColors[contributionLevel];
+                        ctx.beginPath();
+                        ctx.roundRect(x, y, cellSize, cellSize, 2);
+                        ctx.fill();
+                    }
+                }
+            }
+            
+            // Dark Wizard
+            const wizard = {
+                x: 100,
+                y: 320,
+                width: 80,
+                height: 150,
+                handX: 140,
+                handY: 280,
+                staffX: 90,
+                staffY: 340,
+                staffTipX: 70,
+                staffTipY: 220,
+                renderWizard: function() {
+                    // Wizard robe
+                    ctx.fillStyle = '#2e1065';
+                    ctx.beginPath();
+                    ctx.moveTo(this.x, this.y - 100);
+                    ctx.quadraticCurveTo(this.x - 30, this.y - 60, this.x - 40, this.y);
+                    ctx.lineTo(this.x + 40, this.y);
+                    ctx.quadraticCurveTo(this.x + 30, this.y - 60, this.x, this.y - 100);
+                    ctx.fill();
+                    
+                    // Lower robe
+                    ctx.fillStyle = '#3b0764';
+                    ctx.beginPath();
+                    ctx.moveTo(this.x - 40, this.y);
+                    ctx.lineTo(this.x - 50, this.y + 80);
+                    ctx.lineTo(this.x + 50, this.y + 80);
+                    ctx.lineTo(this.x + 40, this.y);
+                    ctx.fill();
+                    
+                    // Hood
+                    ctx.fillStyle = '#4c1d95';
+                    ctx.beginPath();
+                    ctx.moveTo(this.x, this.y - 100);
+                    ctx.quadraticCurveTo(this.x - 15, this.y - 90, this.x - 20, this.y - 70);
+                    ctx.lineTo(this.x + 20, this.y - 70);
+                    ctx.quadraticCurveTo(this.x + 15, this.y - 90, this.x, this.y - 100);
+                    ctx.fill();
+                    
+                    // Face
+                    ctx.fillStyle = '#7e22ce';
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y - 85, 10, 0, Math.PI * 2);
+                    ctx.fill();
+                    
+                    // Eyes
+                    ctx.fillStyle = '#000';
+                    ctx.beginPath();
+                    ctx.ellipse(this.x - 3, this.y - 88, 2, 1, 0, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.beginPath();
+                    ctx.ellipse(this.x + 3, this.y - 88, 2, 1, 0, 0, Math.PI * 2);
+                    ctx.fill();
+                    
+                    // Mouth
+                    ctx.beginPath();
+                    ctx.moveTo(this.x - 3, this.y - 82);
+                    ctx.quadraticCurveTo(this.x, this.y - 80, this.x + 3, this.y - 82);
+                    ctx.stroke();
+                    
+                    // Beard
+                    ctx.fillStyle = '#c4b5fd';
+                    ctx.beginPath();
+                    ctx.moveTo(this.x, this.y - 78);
+                    ctx.quadraticCurveTo(this.x - 5, this.y - 65, this.x - 10, this.y - 55);
+                    ctx.quadraticCurveTo(this.x, this.y - 60, this.x + 10, this.y - 55);
+                    ctx.quadraticCurveTo(this.x + 5, this.y - 65, this.x, this.y - 78);
+                    ctx.fill();
+                    
+                    // Staff
+                    ctx.strokeStyle = '#713f12';
+                    ctx.lineWidth = 4;
+                    ctx.beginPath();
+                    ctx.moveTo(this.staffX, this.staffY);
+                    ctx.lineTo(this.staffTipX, this.staffTipY);
+                    ctx.stroke();
+                    
+                    // Crystal on staff
+                    ctx.fillStyle = '#a855f7';
+                    ctx.globalAlpha = 0.8 + Math.sin(Date.now() / 500) * 0.2;
+                    ctx.beginPath();
+                    ctx.moveTo(this.staffTipX, this.staffTipY);
+                    ctx.lineTo(this.staffTipX - 5, this.staffTipY - 10);
+                    ctx.lineTo(this.staffTipX + 5, this.staffTipY - 10);
+                    ctx.closePath();
+                    ctx.fill();
+                    ctx.globalAlpha = 1;
+                    
+                    // Wizard arm
+                    ctx.strokeStyle = '#3b0764';
+                    ctx.lineWidth = 5;
+                    ctx.beginPath();
+                    ctx.moveTo(this.x + 10, this.y - 50);
+                    ctx.quadraticCurveTo(this.x + 50, this.y - 80, this.handX, this.handY);
+                    ctx.stroke();
+                    
+                    // Hand
+                    ctx.fillStyle = '#c4b5fd';
+                    ctx.beginPath();
+                    ctx.arc(this.handX, this.handY, 7, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            };
+            
+            // Vortex
+            const vortex = {
+                x: 400,
+                y: 300,
+                outerRadius: 80,
+                innerRadius: 40,
+                angle: 0,
+                particles: [],
+                active: false,
+                vortexFade: 0,
+                renderVortex: function() {
+                    // Draw only if active
+                    if (!this.active) return;
+                    
+                    // Vortex core
+                    const gradient = ctx.createRadialGradient(
+                        this.x, this.y, 0, 
+                        this.x, this.y, this.outerRadius
+                    );
+                    gradient.addColorStop(0, 'rgba(216, 180, 254, ' + this.vortexFade + ')');
+                    gradient.addColorStop(0.3, 'rgba(168, 85, 247, ' + this.vortexFade + ')');
+                    gradient.addColorStop(0.6, 'rgba(126, 34, 206, ' + this.vortexFade + ')');
+                    gradient.addColorStop(1, 'rgba(88, 28, 135, 0)');
+                    
+                    ctx.fillStyle = gradient;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.outerRadius, 0, Math.PI * 2);
+                    ctx.fill();
+                    
+                    // Vortex rings
+                    ctx.lineWidth = 2;
+                    for (let i = 1; i <= 3; i++) {
+                        ctx.strokeStyle = 'rgba(168, 85, 247, ' + (this.vortexFade * 0.7) + ')';
+                        ctx.beginPath();
+                        ctx.arc(this.x, this.y, this.outerRadius - i * 15, 0, Math.PI * 2);
+                        ctx.stroke();
+                    }
+                    
+                    // Spiral effect
+                    ctx.lineWidth = 1;
+                    ctx.strokeStyle = 'rgba(216, 180, 254, ' + this.vortexFade + ')';
+                    ctx.beginPath();
+                    let spiralX, spiralY, radius, angle;
+                    for (let i = 0; i < 200; i++) {
+                        radius = i / 5;
+                        angle = this.angle + i * 0.1;
+                        if (radius > this.outerRadius) break;
+                        
+                        spiralX = this.x + radius * Math.cos(angle);
+                        spiralY = this.y + radius * Math.sin(angle);
+                        
+                        if (i === 0) {
+                            ctx.moveTo(spiralX, spiralY);
+                        } else {
+                            ctx.lineTo(spiralX, spiralY);
+                        }
+                    }
+                    ctx.stroke();
+                    
+                    // Update particles
+                    this.updateParticles();
+                    this.renderParticles();
+                    
+                    // Update angle
+                    this.angle += 0.05;
+                },
+                createParticle: function() {
+                    if (!this.active || this.particles.length > 100) return;
+                    
+                    const angle = Math.random() * Math.PI * 2;
+                    const radius = this.innerRadius + Math.random() * 15;
+                    const speed = 1 + Math.random() * 2;
+                    
+                    this.particles.push({
+                        x: this.x + radius * Math.cos(angle),
+                        y: this.y + radius * Math.sin(angle),
+                        vx: speed * Math.cos(angle),
+                        vy: speed * Math.sin(angle),
+                        radius: 1 + Math.random() * 3,
+                        color: `hsl(${260 + Math.random() * 30}, 84%, ${50 + Math.random() * 30}%)`,
+                        alpha: 0.7 + Math.random() * 0.3,
+                        life: 1
+                    });
+                },
+                updateParticles: function() {
+                    for (let i = 0; i < this.particles.length; i++) {
+                        const p = this.particles[i];
+                        
+                        p.x += p.vx;
+                        p.y += p.vy;
+                        p.life -= 0.01;
+                        
+                        // Remove dead particles
+                        if (p.life <= 0) {
+                            this.particles.splice(i, 1);
+                            i--;
+                        }
+                    }
+                },
+                renderParticles: function() {
+                    for (let i = 0; i < this.particles.length; i++) {
+                        const p = this.particles[i];
+                        
+                        ctx.globalAlpha = p.alpha * p.life;
+                        ctx.fillStyle = p.color;
+                        ctx.beginPath();
+                        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+                    ctx.globalAlpha = 1;
+                }
+            };
+            
+            // Magic effects
+            const magicEffects = {
+                energyBeams: [],
+                createEnergyBeam: function() {
+                    // Only create beams if wizard is active
+                    if (!vortex.active) return;
+                    
+                    // Create beam from wizard hand to vortex
+                    if (Math.random() < 0.2) {
+                        const controlPoint = {
+                            x: wizard.handX + (vortex.x - wizard.handX) * 0.3 + (Math.random() - 0.5) * 40,
+                            y: wizard.handY + (vortex.y - wizard.handY) * 0.3 + (Math.random() - 0.5) * 40
+                        };
+                        
+                        this.energyBeams.push({
+                            startX: wizard.handX,
+                            startY: wizard.handY,
+                            controlX: controlPoint.x,
+                            controlY: controlPoint.y,
+                            endX: vortex.x - 20 + Math.random() * 40,
+                            endY: vortex.y - 20 + Math.random() * 40,
+                            width: 1 + Math.random() * 2,
+                            color: `hsl(${270 + Math.random() * 30}, ${80 + Math.random() * 20}%, ${60 + Math.random() * 20}%)`,
+                            alpha: 0.7 + Math.random() * 0.3,
+                            life: 1
+                        });
+                    }
+                    
+                    // Create beam from vortex to random grid cell for transformation effect
+                    if (animationPhase === 'transforming' && Math.random() < 0.3) {
+                        // Pick a random cell in the grid
+                        const randRow = Math.floor(Math.random() * rows);
+                        const randCol = Math.floor(Math.random() * cols);
+                        const cellX = gridStartX + randCol * (cellSize + cellGap) + cellSize / 2;
+                        const cellY = gridStartY + randRow * (cellSize + cellGap) + cellSize / 2;
+                        
+                        const controlPoint = {
+                            x: vortex.x + (cellX - vortex.x) * 0.4 + (Math.random() - 0.5) * 50,
+                            y: vortex.y + (cellY - vortex.y) * 0.4 + (Math.random() - 0.5) * 50
+                        };
+                        
+                        this.energyBeams.push({
+                            startX: vortex.x,
+                            startY: vortex.y,
+                            controlX: controlPoint.x,
+                            controlY: controlPoint.y,
+                            endX: cellX,
+                            endY: cellY,
+                            width: 1 + Math.random() * 2,
+                            color: `hsl(${270 + Math.random() * 60}, ${80 + Math.random() * 20}%, ${60 + Math.random() * 20}%)`,
+                            alpha: 0.7 + Math.random() * 0.3,
+                            life: 1,
+                            cellRow: randRow,
+                            cellCol: randCol
+                        });
+                        
+                        // Transform the grid cell
+                        if (Math.random() < 0.5) {
+                            contributionGrid[randRow][randCol] = Math.min(4, contributionGrid[randRow][randCol] + 1);
+                        }
+                    }
+                },
+                updateEnergyBeams: function() {
+                    for (let i = 0; i < this.energyBeams.length; i++) {
+                        const beam = this.energyBeams[i];
+                        
+                        beam.life -= 0.03;
+                        
+                        // Remove dead beams
+                        if (beam.life <= 0) {
+                            this.energyBeams.splice(i, 1);
+                            i--;
+                        }
+                    }
+                },
+                renderEnergyBeams: function() {
+                    for (let i = 0; i < this.energyBeams.length; i++) {
+                        const beam = this.energyBeams[i];
+                        
+                        ctx.globalAlpha = beam.alpha * beam.life;
+                        ctx.strokeStyle = beam.color;
+                        ctx.lineWidth = beam.width;
+                        
+                        // Draw energy beam as quadratic curve
+                        ctx.beginPath();
+                        ctx.moveTo(beam.startX, beam.startY);
+                        ctx.quadraticCurveTo(beam.controlX, beam.controlY, beam.endX, beam.endY);
+                        ctx.stroke();
+                        
+                        // Add glow effect
+                        ctx.shadowColor = beam.color;
+                        ctx.shadowBlur = 10;
+                        ctx.lineWidth = beam.width / 2;
+                        ctx.stroke();
+                        ctx.shadowBlur = 0;
+                        
+                        // If this beam has a target cell, add a flash effect
+                        if (beam.life < 0.3 && beam.cellRow !== undefined) {
+                            const cellX = gridStartX + beam.cellCol * (cellSize + cellGap);
+                            const cellY = gridStartY + beam.cellRow * (cellSize + cellGap);
+                            
+                            ctx.fillStyle = beam.color;
+                            ctx.globalAlpha = beam.life * 2;
+                            ctx.beginPath();
+                            ctx.roundRect(cellX, cellY, cellSize, cellSize, 2);
+                            ctx.fill();
+                        }
+                    }
+                    ctx.globalAlpha = 1;
+                }
+            };
+            
+            // Animation phases
+            let animationPhase = 'intro';
+            let phaseTimer = 0;
+            let introProgress = 0;
+            
+            // Main animation loop
+            function animate() {
+                // Clear canvas
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                // Update phase timer
+                phaseTimer += 1/60; // Assuming 60 fps
+                
+                // Phase management
+                switch(animationPhase) {
+                    case 'intro':
+                        // Fade in the wizard and grid
+                        introProgress = Math.min(1, phaseTimer / 2);
+                        ctx.globalAlpha = introProgress;
+                        drawContributionGrid();
+                        wizard.renderWizard();
+                        ctx.globalAlpha = 1;
+                        
+                        if (phaseTimer >= 2) {
+                            animationPhase = 'castingSpell';
+                            phaseTimer = 0;
+                        }
+                        break;
+                        
+                    case 'castingSpell':
+                        // Wizard casts spell and vortex appears
+                        drawContributionGrid();
+                        wizard.renderWizard();
+                        
+                        // Activate vortex
+                        vortex.active = true;
+                        vortex.vortexFade = Math.min(0.8, phaseTimer / 2);
+                        vortex.renderVortex();
+                        
+                        // Create particles
+                        if (Math.random() < 0.3) {
+                            vortex.createParticle();
+                        }
+                        
+                        // Create energy beams from wizard to vortex
+                        magicEffects.createEnergyBeam();
+                        magicEffects.updateEnergyBeams();
+                        magicEffects.renderEnergyBeams();
+                        
+                        if (phaseTimer >= 3) {
+                            animationPhase = 'transforming';
+                            phaseTimer = 0;
+                        }
+                        break;
+                        
+                    case 'transforming':
+                        // Vortex affects the contribution grid
+                        drawContributionGrid();
+                        wizard.renderWizard();
+                        vortex.renderVortex();
+                        
+                        // More particles in transformation phase
+                        if (Math.random() < 0.5) {
+                            vortex.createParticle();
+                        }
+                        
+                        // Energy beams from wizard to vortex and vortex to grid
+                        magicEffects.createEnergyBeam();
+                        magicEffects.updateEnergyBeams();
+                        magicEffects.renderEnergyBeams();
+                        
+                        if (phaseTimer >= 8) {
+                            animationPhase = 'ending';
+                            phaseTimer = 0;
+                        }
+                        break;
+                        
+                    case 'ending':
+                        // Fade out effects, show completed grid
+                        drawContributionGrid();
+                        wizard.renderWizard();
+                        
+                        // Fade out vortex
+                        vortex.vortexFade = Math.max(0, 0.8 - phaseTimer / 2);
+                        vortex.renderVortex();
+                        
+                        magicEffects.updateEnergyBeams();
+                        magicEffects.renderEnergyBeams();
+                        
+                        if (phaseTimer >= 3) {
+                            // Restart animation
+                            animationPhase = 'intro';
+                            phaseTimer = 0;
+                            introProgress = 0;
+                            vortex.active = false;
+                            vortex.particles = [];
+                            magicEffects.energyBeams = [];
+                            initializeGrid();
+                        }
+                        break;
+                }
+                
+                // Continue animation
+                requestAnimationFrame(animate);
+            }
+            
+            // Initialize and start animation
+            initializeGrid();
+            animate();
+        });
+    </script>
+</body>
+</html>

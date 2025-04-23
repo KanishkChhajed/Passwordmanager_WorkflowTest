@@ -7,8 +7,8 @@ on:
         paths-ignore:
             - '**.md'
             - '.github/workflows/*'
-    schedule:
-        - cron : '0 * * * *'   #Run every hour
+    # schedule:
+        # - cron : '0 * * * *'   #Run every hour
 
 permissions:
     contents: write

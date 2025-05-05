@@ -20,15 +20,13 @@
   
   | Stars | Forks | Watchers | Open Issues | Closed Issues |
   |:----:|:-----:|:--------:|:-----------:|:-------------:|
-  | 0 | 0 | 0 | 0 | 0 |
+  | 1 | 0 | 1 | 0 | 0 |
   
   ---
   
   ## 📢 Last Commit
   
-  > "Rename README.md to README_original.md
-
-Renaming this for my workflow testing purpose"
+  > "Updating test.yaml file"
   
   ---
   

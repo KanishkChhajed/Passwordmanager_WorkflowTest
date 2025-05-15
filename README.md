@@ -1,42 +1,9 @@
-<h1 align="center">
-    <img src="https://img.shields.io/badge/Passwordmanager_WorkflowTest-🎯-blueviolet?style=for-the-badge" alt="Repo Badge">
-  </h1>
-  
-  <p align="center">
-    <img src="https://avatars.githubusercontent.com/u/121193249?v=4" width="100" style="border-radius:50%;">
-  </p>
-  
-  ---
-  
-  ## 📖 About the Project
-  - **Repository Name:** Passwordmanager_WorkflowTest
-  - **Owner:** KanishkChhajed
-  - **Visibility:** public
-  - **Primary Language(s):** HTML,JavaScript,CSS
-  
-  ---
-  
-  ## 📊 Stats
-  
-  | Stars | Forks | Watchers | Open Issues | Closed Issues |
-  |:----:|:-----:|:--------:|:-----------:|:-------------:|
-  | 1 | 0 | 1 | 0 | 0 |
-  
-  ---
-  
-  ## 📢 Last Commit
-  
-  > "Updating test.yaml file"
-  
-  ---
-  
-  ## 🤝 Contributors
-  
-  
-  - [`KanishkChhajed`](#)
-  
-  
-  ---
-  
-  > *Generated with ❤️ by an automated GitHub Action* 🚀
-  
+# React + Vite
+
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+
+Currently, two official plugins are available:
+
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh 
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+![Dark Wizard](https://raw.githubusercontent.com/KanishkChhajed/Passwordmanager_WorkflowTest/main/animation_00001.svg)
